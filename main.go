@@ -7,7 +7,7 @@ import (
 
 func helloHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
-        fmt.Fprintf(w, "Hello world.")
+	fmt.Fprintf(w, "Hello world.")
 	fmt.Println("helloHandler is called.")
 }
 
