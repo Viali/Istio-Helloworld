@@ -1,36 +1,32 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: my-nginx
 spec:
   selector:
     matchLabels:
-      run: my-nginx
+      app: my-nginx
   replicas: 1
   template:
     metadata:
       labels:
-        run: my-nginx
+        app: my-nginx
     spec:
       containers:
       - name: my-nginx
         image: nginx
         ports:
         - containerPort: 80
-
+          name: http
+          protocol: TCP
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: my-nginx
-  labels:
-    run: my-nginx
 spec:
-  type: NodePort
   ports:
-  - port: 80
-    protocol: TCP
-    nodePort: 31380
+  - name: http
+    port: 80
   selector:
-    run: my-nginx
-
+    app: my-nginx
